@@ -4,7 +4,7 @@ magrittr::`%>%`
 
 #' @export
 pmt <- function(balance, term, rate) {
-    .Call("_mortgage_pmt", balance, term, rate)
+    .Call("_mortgage_pmt", balance, term, rate / 12)
 }
 
 is.rate <- function(x) {

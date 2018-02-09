@@ -36,7 +36,9 @@ amortize.data.frame <- function(.data, principal = 'principal', term = 'term', r
         id <- c(1:nrow(.data))
         message("adding id column 1...", nrow(.data))
     } else {
-        id <- tidyselect::vars_pull(names(.data), !! rlang::enquo(id))   
+        id <- tidyselect::vars_pull(names(.data), !! rlang::enquo(id)) 
+        id <- data[[id]]
+#        id <- rlang::enquo(id)
     }
      
     amort_df <- do.call(rbind, Map(pryr::partial(.Call, "_mortgage_amortize"), .data[[principal]], .data[[term]], .data[[rate]] / 12))
