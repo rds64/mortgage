@@ -27,8 +27,3 @@ List amortize(double principal, int term, float rate) {
     return amort;
 }
 
-//[[Rcpp::export]]
-float pmt(double principal, int term, float rate) {
-    
-    return (principal * rate) / (1 - std::pow(1 + rate, -1 * term));
-}

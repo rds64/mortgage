@@ -4,6 +4,6 @@
 \alias{amortize}
 \title{Create a Mortgage Class Object}
 \usage{
-amortize(.data, principal = "principal", term = "term", rate = "rate",
-  id = NULL)
+amortize(.data = NULL, principal = "principal", term = "term",
+  rate = "rate", id = NULL)
 }

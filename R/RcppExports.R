@@ -9,3 +9,15 @@ pmt <- function(principal, term, rate) {
     .Call('_mortgage_pmt', PACKAGE = 'mortgage', principal, term, rate)
 }
 
+check <- function(balance, payment, term, rate) {
+    .Call('_mortgage_check', PACKAGE = 'mortgage', balance, payment, term, rate)
+}
+
+solve_rate <- function(balance, payment, term, start = .05) {
+    .Call('_mortgage_solve_rate', PACKAGE = 'mortgage', balance, payment, term, start)
+}
+
+WAC <- function(balance, rate) {
+    .Call('_mortgage_WAC', PACKAGE = 'mortgage', balance, rate)
+}
+

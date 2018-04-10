@@ -29,6 +29,7 @@ test_df <- data.frame(
 
 testthat::test_that("amortizing row data with multiple rows frame with standard names", {    
    amortize(test_df, principal = principal, term = term, rate = rate) 
+   amortize(test_df, term = term, rate = rate) 
    amortize(test_df, principal = 'principal', term = 'term', rate = 'rate') 
 })
 
@@ -54,3 +55,4 @@ testthat::test_that("amortizing with default method", {
 testthat::test_that("amortizing with default method and loan id", {    
     amortize(principal = test_df$p, term = test_df$t, rate = test_df$r, id = test_df$id)
 })
+

@@ -19,15 +19,55 @@ BEGIN_RCPP
 END_RCPP
 }
 // pmt
-float pmt(double principal, int term, float rate);
+long double pmt(double principal, int term, double rate);
 RcppExport SEXP _mortgage_pmt(SEXP principalSEXP, SEXP termSEXP, SEXP rateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type principal(principalSEXP);
     Rcpp::traits::input_parameter< int >::type term(termSEXP);
-    Rcpp::traits::input_parameter< float >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
     rcpp_result_gen = Rcpp::wrap(pmt(principal, term, rate));
+    return rcpp_result_gen;
+END_RCPP
+}
+// check
+bool check(double balance, long double payment, int term, double rate);
+RcppExport SEXP _mortgage_check(SEXP balanceSEXP, SEXP paymentSEXP, SEXP termSEXP, SEXP rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type balance(balanceSEXP);
+    Rcpp::traits::input_parameter< long double >::type payment(paymentSEXP);
+    Rcpp::traits::input_parameter< int >::type term(termSEXP);
+    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
+    rcpp_result_gen = Rcpp::wrap(check(balance, payment, term, rate));
+    return rcpp_result_gen;
+END_RCPP
+}
+// solve_rate
+long double solve_rate(float balance, float payment, int term, float start);
+RcppExport SEXP _mortgage_solve_rate(SEXP balanceSEXP, SEXP paymentSEXP, SEXP termSEXP, SEXP startSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< float >::type balance(balanceSEXP);
+    Rcpp::traits::input_parameter< float >::type payment(paymentSEXP);
+    Rcpp::traits::input_parameter< int >::type term(termSEXP);
+    Rcpp::traits::input_parameter< float >::type start(startSEXP);
+    rcpp_result_gen = Rcpp::wrap(solve_rate(balance, payment, term, start));
+    return rcpp_result_gen;
+END_RCPP
+}
+// WAC
+float WAC(std::vector<float> balance, std::vector<float> rate);
+RcppExport SEXP _mortgage_WAC(SEXP balanceSEXP, SEXP rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<float> >::type balance(balanceSEXP);
+    Rcpp::traits::input_parameter< std::vector<float> >::type rate(rateSEXP);
+    rcpp_result_gen = Rcpp::wrap(WAC(balance, rate));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -35,6 +75,9 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_mortgage_amortize", (DL_FUNC) &_mortgage_amortize, 3},
     {"_mortgage_pmt", (DL_FUNC) &_mortgage_pmt, 3},
+    {"_mortgage_check", (DL_FUNC) &_mortgage_check, 4},
+    {"_mortgage_solve_rate", (DL_FUNC) &_mortgage_solve_rate, 4},
+    {"_mortgage_WAC", (DL_FUNC) &_mortgage_WAC, 2},
     {NULL, NULL, 0}
 };
 

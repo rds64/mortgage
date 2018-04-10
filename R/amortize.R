@@ -9,6 +9,8 @@
 #' 
 amortize <- function(.data = NULL, principal = 'principal', term = 'term', rate = 'rate', id = NULL) {
         UseMethod("amortize", .data)
+    # add arm_options to method dispach so that null options will trigger regular amortization
+    # can I use two object determinations methods   
 }
 #.
 #' @export
@@ -35,10 +37,11 @@ amortize.data.frame <- function(.data, principal = 'principal', term = 'term', r
     if (is.null(id)) {
         id <- c(1:nrow(.data))
         message("adding id column 1...", nrow(.data))
+    } else if (length(id) != 1) {
+        id <- id 
     } else {
         id <- tidyselect::vars_pull(names(.data), !! rlang::enquo(id)) 
         id <- data[[id]]
-#        id <- rlang::enquo(id)
     }
      
     amort_df <- do.call(rbind, Map(pryr::partial(.Call, "_mortgage_amortize"), .data[[principal]], .data[[term]], .data[[rate]] / 12))

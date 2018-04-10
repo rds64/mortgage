@@ -16,15 +16,6 @@ is.rate <- function(x) {
     }
 }
 
-WAC <- function(pool) {
-    balance <- do.call("sum", Map(function(x) x@Principal, pool@Mortages))
-    do.call("sum", Map(function(x) x@Rate * (x@Principal / balance), pool@Mortages))
-}
-
-WAM <- function(pool) {
-    balance <- do.call("sum", Map(function(x) x@Principal, pool@Mortages))
-    do.call("sum", Map(function(x) x@Term * (x@Principal / balance), pool@Mortages))
-}
 
 Count <- function(pool) {
     types <-  sort(do.call('rbind', Map(function(x) class(x)[1], pool@Mortages)))
