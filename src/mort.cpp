@@ -16,6 +16,11 @@ long double pmt(double principal, int term, double rate) {
     return (principal * m_rate) / (1 - std::pow(1 + m_rate, -1 * term));
 }
 
+/*
+    Function Checks to see if provided payment and calculated payment from provided
+    loan terms are the same.
+ */
+
 //[[Rcpp::export]]
 bool check(double balance, long double payment, int term, double rate) {
     long double checked_pmt;
@@ -32,9 +37,9 @@ bool check(double balance, long double payment, int term, double rate) {
 /*
     Formula:
  
-    f(i) = P − P (1+i)^-N − iA
-  -------------------------------
-    f′(i) = N P (1+i)^(-N-1) − A
+        f(i) = P − P (1+i)^-N − iA
+  i - ------------------------------
+        f′(i) = N P (1+i)^(-N-1) − A
  
 */
 
@@ -57,7 +62,7 @@ long double solve_rate(float balance, float payment, int term, float start = .05
       
         initial = initial - ((payment - payment * std::pow(1 + initial, -1 * term) - (initial * balance)) / (term * payment * std::pow(1 + initial, -1 * term - 1) - balance));
         converge = check(balance, payment, term, initial * 12);
-        cout << initial << "/n";
+//        cout << initial << "/n";
                
         if (iterations == 100) break;  
         iterations++; 
@@ -71,7 +76,7 @@ long double solve_rate(float balance, float payment, int term, float start = .05
     std::string str ("Algorithm Converged After # Iterations");
 //  str.replace(27, 1, char(iterations));
     
-    cout << str;
+//    cout << str;
     return (initial * 12);
 }
 
