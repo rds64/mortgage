@@ -1,13 +1,13 @@
 Package: mortgage
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
-Version: 1.0
-Date: 2018-02-04
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or
-        more full sentences.
+Title: Mortgage Analytics in R
+Version: 0.1
+Date: 2018-04-13
+Authors@R: person("Robert Daniel", "Smith", email = "rds2@gwmail.gwu.edu", role = c("aut", "cre"))
+Maintainer: Robert Daniel Smith
+Description: Package for basic mortgage analytics in R
 License: GPL (>= 2)
 Imports: Rcpp (>= 0.12.13)
+Depends: Rcpp, tibble
 LinkingTo: Rcpp
 RoxygenNote: 6.0.1
