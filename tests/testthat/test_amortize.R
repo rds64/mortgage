@@ -1,4 +1,4 @@
-testthat::context("amortizeing a data.frame of lonas")
+testthat::context("amortizing a data.frame of loans")
 
 test_df <- data.frame(
     id = "A",

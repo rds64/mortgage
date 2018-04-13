@@ -1,6 +1,6 @@
 
 weighted_avg <- function(weight, value) {
-    value * (weight / sum(weight))
+    weighted.mean(value, weight)
 }
 
 WAC <- function(balances = balance, rates = rate) {

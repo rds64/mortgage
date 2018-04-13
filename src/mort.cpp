@@ -10,10 +10,8 @@ using namespace std;
 
 //[[Rcpp::export]]
 long double pmt(double principal, int term, double rate) {
-    long double m_rate;
-    m_rate = rate / 12;
     
-    return (principal * m_rate) / (1 - std::pow(1 + m_rate, -1 * term));
+    return (principal * rate) / (1 - std::pow(1 + rate, -1 * term));
 }
 
 /*
@@ -45,15 +43,12 @@ bool check(double balance, long double payment, int term, double rate) {
 
 //[[Rcpp::export]]
 long double solve_rate(float balance, float payment, int term, float start = .05) {
-    long double m_start;
     long double initial;
     bool converge;
     int iterations;
     
-    m_start = start / 12;
-    
-    initial = m_start - ((payment - payment * std::pow(1 + m_start, -1 * term) - (m_start * balance)) / 
-        (term * payment * std::pow(1 + m_start, -1 * term - 1) - balance));
+    initial = start - ((payment - payment * std::pow(1 + start, -1 * term) - (start * balance)) / 
+        (term * payment * std::pow(1 + start, -1 * term - 1) - balance));
     
     converge = check(balance, payment, term, initial);
     iterations = 0;
@@ -61,7 +56,7 @@ long double solve_rate(float balance, float payment, int term, float start = .05
     while (!converge) {
       
         initial = initial - ((payment - payment * std::pow(1 + initial, -1 * term) - (initial * balance)) / (term * payment * std::pow(1 + initial, -1 * term - 1) - balance));
-        converge = check(balance, payment, term, initial * 12);
+        converge = check(balance, payment, term, initial);
 //        cout << initial << "/n";
                
         if (iterations == 100) break;  
@@ -77,13 +72,15 @@ long double solve_rate(float balance, float payment, int term, float start = .05
 //  str.replace(27, 1, char(iterations));
     
 //    cout << str;
-    return (initial * 12);
+    return initial;
 }
 
 
 /*** R
-    test_pmt <- .Call("_mortgage_pmt", 100000, 360, .04)
+    test_pmt <- .Call("_mortgage_pmt", 100000, 360, .04/ 12)
     test_pmt
-    .Call("_mortgage_check", 100000, test_pmt, 360, .04)
-    .Call("_mortgage_solve_rate", 100000, 477.4169, 360, .075)
+    .Call("_mortgage_check", 100000, test_pmt, 360, .04 / 12)
+    .Call("_mortgage_solve_rate", 100000, 477.4169, 360, .075 / 12) * 12
 */
+
+    

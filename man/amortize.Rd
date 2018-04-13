@@ -2,8 +2,8 @@
 % Please edit documentation in R/amortize.R
 \name{amortize}
 \alias{amortize}
-\title{Create a Mortgage Class Object}
+\title{Amortize One Or a Pool of Loans}
 \usage{
-amortize(.data = NULL, principal = "principal", term = "term",
+amortize(data = NULL, principal = "principal", term = "term",
   rate = "rate", id = NULL)
 }

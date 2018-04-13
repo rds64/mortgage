@@ -7,6 +7,13 @@ pmt <- function(balance, term, rate) {
     .Call("_mortgage_pmt", balance, term, rate / 12)
 }
 
+PMT <- function(rate, term, balance, end_balance, due = c("end", "beg")) {
+    due <- match.arg(due, c("end", "beg"))
+    if (due == "end") return(((balance) * m_rate) / (1 - (1 + m_rate)^-term))
+    if (due == "beg") return()
+}
+#' @description Same a Excel's PMT function  
+#' 
 is.rate <- function(x) {
     if (x >= 1) {
         message(paste0(x, " interperted as ", x,"%"))

@@ -4,5 +4,40 @@
 \alias{mort}
 \title{Calculate the a Missing Loan Term}
 \usage{
-mort(balance = NA, payment = NA, rate = NA, term = NA, initial = 0.05)
+mort(balance = NA, payment = NA, rate = NA, term = NA,
+  initial = 0.0041)
+}
+\arguments{
+\item{balance}{the initial loan amount}
+
+\item{payment}{the periodic loan payment amount}
+
+\item{rate}{the periodic interest rate on the loan}
+
+\item{term}{the term of the loan in periods}
+
+\item{initial}{this is the inital rate used in order to numerically 
+solve for rate using the Newton-Ralphson method. 0.0041 is the default initial value
+which is 5% over 12 months. You should only need to change this to speed up
+convergence when the rate is very different than 5%}
+}
+\description{
+the mort function will return the missing term from a loan
+
+The mort function will return the missing term from a loan. 
+The function will solve for whichever argument is left NA.
+
+Formula: P = (Pv*R) / [1 - (1 + R)^(-n)]
+P = Monthly Payment
+Pv = Present Value (starting value of the loan)
+R = Periodic Interest Rate = APR/number of interest periods per year
+n = Total number of interest periods (interest periods per year * number of years)
+}
+\examples{
+mort(balance = 100000, rate = .04/ 12, term = 360)
+mort(payment = 477.415, rate = .04 / 12, term = 360)
+mort(balance = 100000, rate = .04 / 12, payment = 477.415)
+mort(balance = 100000, payment = 477.415, term = 360) 
+
+
 }
