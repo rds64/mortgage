@@ -4,7 +4,7 @@ Title: Mortgage Analytics in R
 Version: 0.1
 Date: 2018-04-13
 Authors@R: person("Robert Daniel", "Smith", email = "rds2@gwmail.gwu.edu", role = c("aut", "cre"))
-Maintainer: Robert Daniel Smith
+Maintainer: Robert Smith <rds2@gwmail.gwu.edu>
 Description: Package for basic mortgage analytics in R
 License: GPL (>= 2)
 Imports: Rcpp (>= 0.12.13)
